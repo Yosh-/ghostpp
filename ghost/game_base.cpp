@@ -2096,6 +2096,9 @@ void CBaseGame :: EventPlayerJoined( CPotentialPlayer *potential, CIncomingJoinP
 		}
 	}
 
+	//shows joined realm for each player
+	SendAllChat( "Player [" + joinPlayer->GetName( ) + "] has joined from [" + ( JoinedRealm == string( ) ? "LAN" : JoinedRealm ) + "]" );
+
 	// check for multiple IP usage
 
 	if( m_GHost->m_CheckMultipleIPUsage )
