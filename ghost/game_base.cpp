@@ -642,10 +642,17 @@ bool CBaseGame :: Update( void *fd, void *send_fd )
 
 				for( vector<CGamePlayer *> :: iterator i = m_Players.begin( ); i != m_Players.end( ); ++i )
 				{
-					lat = lat + (*i)->GetPing( m_GHost->m_LCPings );
+					unsigned char playersid = GetSIDFromPID( (*i)->GetPID( ) );
+					if( playersid < m_Slots.size( ) )
+					{
+						if ( m_Slots[playersid].GetTeam( ) < 12 )
+						{
+							lat = lat + (*i)->GetPing( m_GHost->m_LCPings );
 
-					if( (*i)->GetPing( m_GHost->m_LCPings ) > 0 )
-						n++;
+							if( (*i)->GetPing( m_GHost->m_LCPings ) > 0 )
+								n++;
+						}
+					}
 				}
 
 				if( n > 0 ) 
